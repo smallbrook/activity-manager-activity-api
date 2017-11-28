@@ -16,7 +16,7 @@
   			t_activity
   		<where>
   			<if test="activityName != null and activityName != ''">
-  				activityName = #{activityName}
+  				activityName LIKE CONCAT('%','${activityName}','%')
   			</if>
   		</where>
   	</select>
@@ -26,7 +26,7 @@
   		FROM t_activity
   		<where>
   			<if test="activityEntity.activityName != null and activityEntity.activityName != ''">
-  				activityName = #{activityEntity.activityName}
+  				activityName LIKE CONCAT('%','${activityEntity.activityName}','%')
   			</if>
   		</where>
   		<if test="sortColumn != null and sort != null">

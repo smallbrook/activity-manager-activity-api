@@ -28,7 +28,7 @@ public class ActivityController {
 	ActivityService activityService;
 	
 	@CrossOrigin(origins = "*", maxAge = 3600)
-	@RequestMapping(value="/list/{page}/{pageSize}",method=RequestMethod.POST)
+	@RequestMapping(value="/list/{page}/{pageSize}",method=RequestMethod.POST,produces={MediaType.APPLICATION_JSON_UTF8_VALUE})
 	@ResponseBody
 	public ResponsePageData<ActivityPo> getActivityList(ActivityPo activityPo,@PathVariable int page,@PathVariable int pageSize){
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -49,7 +49,7 @@ public class ActivityController {
 	public ResponseMessage<String> addActivity(@RequestBody ActivityPo activityPo){
 		ResponseMessage<String> rm = new ResponseMessage<>();
 		
-		activityService.activityInsert(activityPo);
+		//activityService.activityInsert(activityPo);
 		
 		rm.setCode(SysConstant.SUCCESS_CODE);
 		rm.setMessage(SysConstant.SUCCESS_MSG);
