@@ -9,6 +9,9 @@
   		<result column="activityStartTime" property="activityStartTime" />
   		<result column="activityEndTime" property="activityEndTime" />
   	</resultMap>
+  	<sql id="Base_Column_List" >
+    	activityID,activityName,activityStartTime,activityEndTime
+  	</sql>
   	<select id="count" parameterType="com.ouc.am.activity.api.po.ActivityPo" resultType="int">
   		SELECT 
   			COUNT(activityID)
@@ -22,7 +25,7 @@
   	</select>
   	<select id="activityQuery" resultMap="BaseResultMap" parameterType="java.util.Map">
   		SELECT 
-  			activityID,activityName,activityStartTime,activityEndTime 
+  			<include refid="Base_Column_List"/> 
   		FROM t_activity
   		<where>
   			<if test="activityEntity.activityName != null and activityEntity.activityName != ''">
@@ -67,4 +70,33 @@
 		    </if>
 	    </trim>
   	</insert>
+  	<update id="update" parameterType="com.ouc.am.activity.api.po.ActivityPo">
+  		UPDATE t_activity
+  		<set>
+  			<if test="activityName != null">
+  				activityName = #{activityName},
+  			</if>
+  			<if test="activityStartTime != null">
+  				activityStartTime = #{activityStartTime},
+  			</if>
+  			<if test="activityEndTime != null">
+  				activityEndTime = #{activityEndTime},
+  			</if>
+  		</set>
+  		<where>
+  			<if test="activityID != null">
+  				activityID = #{activityID}
+  			</if>
+  		</where>
+  	</update>
+  	<select id="selectByID" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  		SELECT
+  			<include refid="Base_Column_List"/>
+  		FROM t_activity
+  		<where>
+  			<if test="activityID != null">
+  				activityID = ${activityID}
+  			</if>
+  		</where>
+  	</select>
   </mapper>

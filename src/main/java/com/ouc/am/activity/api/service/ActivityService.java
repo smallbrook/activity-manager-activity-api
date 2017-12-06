@@ -26,4 +26,22 @@ public class ActivityService {
 	public int activityCount(ActivityPo activityPo){
 		return activityMapper.count(activityPo);
 	}
+	
+	public ActivityPo getOneByID(long activityID){
+		ActivityPo activityPo = new ActivityPo();
+		//try{
+			activityPo = activityMapper.selectByID(activityID);
+		//}
+		//catch (Exception e){
+			
+		//}
+		if (activityPo != null)
+			return activityPo;
+		return new ActivityPo();
+		
+	}
+	
+	public int update(ActivityPo activityPo){
+		return activityMapper.update(activityPo);
+	}
 }
